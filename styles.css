@@ -10,8 +10,12 @@
     body {
         background-color:#212528;
         display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
         align-items: center;
-        height: 100vh;
+        padding-top: 60px;
+        margin: 0;
+        height: auto;
     }
     h1 {
         color: #596a48;
@@ -19,17 +23,22 @@
     }
     
     p {
-        color: #212528;
+        color: #c9c1b6;
         text-align: center;
     }
 
     article {
         background-color: #c9c1b6;
         border: 1px solid #999788;
+        border-radius: 10px;
         box-shadow: 0px 0px 10px rgba(89, 106, 72, 0.5);
         padding: 20px; /* Adds space inside the card */
         margin: 20px auto; /* Adds space outside the card */
         max-width: 600px; /* Adjust based on your design needs */
         width: 100%; /* Makes it responsive */
         box-sizing: border-box;
+    }
+
+    article > p {
+        color: #212528;
     }
