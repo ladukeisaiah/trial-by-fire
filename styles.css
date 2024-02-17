@@ -7,11 +7,13 @@
     }
     h1 {
         color: #596a48;
-    };
+        text-align: center;
+    }
     
     p {
         color: #212528;
-    };
+        text-align: center;
+    }
 
     article {
         background-color: #c9c1b6;
