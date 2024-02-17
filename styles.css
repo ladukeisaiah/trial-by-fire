@@ -42,3 +42,8 @@
     article > p {
         color: #212528;
     }
+
+    section {
+        text-align: center;
+        background-color: #c9c1b6;
+    }
