@@ -1,7 +1,18 @@
-h1 {
-    color: green;
-}
+/* <!-- my color pallete: #596a48, #212528, #999788, #c9c1b6, #403b35 --> */
+    body {
+        background-color:#403b35;
+    }
+    h1 {
+        color: #596a48;
+    };
+    
+    p {
+        color: #212528;
+    };
 
-p {
-    color: blue;
-}
+    article {
+        background-color: #c9c1b6;
+        border: 1px solid #999788;
+        box-shadow: 0px 0px 10px rgba(89, 106, 72, 0.5);
+        
+    }
