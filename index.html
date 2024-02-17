@@ -36,7 +36,7 @@
     </article>
 
     <section>
-        <form>
+        <form id="blog-form">
             <h2>CREATE YOUR OWN POST HERE:</h2>
 
             <label>Type your title here:</label>
@@ -51,8 +51,9 @@
     </section>
     
     <script>
-        alert('hello world')
+        
         document.getElementById('blog-form').addEventListener('submit', function(event) {
+        alert('hello world')
         event.preventDefault(); // Prevent the default form submission
 
         // // Get the values from the form inputs
