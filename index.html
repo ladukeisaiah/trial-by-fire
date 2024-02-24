@@ -10,6 +10,16 @@
     <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
     <title>Document</title>
+    <!-- We are looking for the blog read time -->
+    <!-- we would like it to be located under the heading  it will be shown in minutes-->
+    <!-- and we will calculate it using the following formula. we will estimate that a user can read 4 words a second-->
+    <!-- First we will create a script for calculating the read time of the ENTIRE blog-->
+    <!-- We will use something like .foreach to cycle through all the headings and p's used in the article cards-->
+    <!-- then we will take that calculation and put it in minute and second format-->
+    <!-- We will create a new section at the top of the body to then display our blog's read time-->
+    <!-- Populate new section with calculation -->
+    <!---->
+
 </head>
 
 <header>
@@ -17,7 +27,10 @@
 </header>
 
 <body>
-
+    <div>
+        <h3>Blog read time:</h3>
+        <h5 id="blog-read-time"></h5>
+    </div>
     <div id="articles-container"></div>
     <form id="article-form">
         <h2>CREATE YOUR OWN POST HERE:</h2>
@@ -43,7 +56,7 @@
         // This function to render articles
         function renderArticles() {
             const container = document.getElementById('articles-container');
-            container.innerHTML = ''; // This will clear existing articles as if to reset the state
+            container.innerHTML = ''; // This will clear existing articles as if to reset the state but its not necessary
             articles.forEach(article => {
                 const articleEl = document.createElement('div');
                 articleEl.innerHTML = `
@@ -77,6 +90,49 @@
 
         // This is for the initial render
         renderArticles();
+
+        function getReadTime() {
+            // .innerText.match(/\S+/g).length
+            let paragraphs = document.getElementsByTagName('p');
+            let headers = document.getElementsByTagName('h2');
+            
+            let pWordCount = 0;
+            let h2WordCount = 0;
+            console.log(paragraphs)
+
+            // below: this should cycle through the array of ps and count their length and add it to the pWordCount
+            for (let i = 0; i < paragraphs.length; i++) {
+                const paragraph = paragraphs[i].innerText.match(/\S+/g).length;
+                pWordCount += paragraph;
+            }
+
+            // below: this should cycle through the array of h2s and count their length and add it to the h2WordCount
+            for (let i = 0; i < headers.length; i++) {
+                const header = headers[i].innerText.match(/\S+/g).length;
+                h2WordCount += header;
+            }
+
+            const totalWordCount = pWordCount + h2WordCount;
+
+            const readTime = document.getElementById("blog-read-time");
+            readTime.innerText = totalWordCount;
+
+            // for (paragraph of paragraphs) {
+            //     pWordCount += paragraph.innerText.match(/\S+/g).length;
+            // }
+
+            console.log(h2WordCount)
+            // const h2WordCount = document.getElementsByTagName('h2').innerText.match(/\S+/g).length;
+
+            // const totalWordCount = pWordCount + h2WordCount;
+
+            
+
+            // return totalWordCount;
+        }
+        getReadTime();
     </script>
+
+
 </body>
 </html>
