@@ -10,13 +10,14 @@
     }
     body {
         padding-top: 135px;
-        background-color:#212528;
+        background-color: #c9c1b6;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
         margin: 0;
         height: auto;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
     h1 {
         color: #596a48;
@@ -24,19 +25,23 @@
     }
     
     p {
-        color: #c9c1b6;
+        color: #fff;
     }
 
     article, form {
-        background-color: #c9c1b6;
+        
+        background-color:#212528;
         border: 1px solid #999788;
         border-radius: 10px;
+        color: #fff;
         box-shadow: 0px 0px 10px rgba(89, 106, 72, 0.5);
         padding: 20px; /* Adds space inside the card */
         margin: 20px auto; /* Adds space outside the card */
+        min-width: 500px;
         max-width: 750px; /* Adjust based on your design needs */
         width: 100%; /* Makes it responsive */
         box-sizing: border-box;
+        text-wrap: wrap;
     }
 
     form {
@@ -57,7 +62,7 @@
     }
 
     article > p {
-        color: #212528;
+        color: #fff;
     }
 
     #blog-info {

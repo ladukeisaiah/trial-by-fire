@@ -1,0 +1,91 @@
+<!-- <div id="articles-container">
+        <article id="1">
+            <h2>Whispers of Giants: A Journey Through the Redwood Forests</h2>
+            <p>In the heart of California, where the fog weaves through the ancient trunks and the sunlight filters 
+            down in emerald beams, lies a sanctuary of nature's own making: the Redwood Forests. These 
+            towering giants, predominantly found in the coastal regions, are not just trees but living relics of 
+            our planet's ancient past, stretching skyward to heights over 350 feet, making them some of the 
+            tallest living beings on Earth.</p>
+        </article>
+
+        <article id="2">
+            <h2>A Legacy Rooted in Time</h2>
+            <p>The Redwood Forests, predominantly consisting of Coast Redwoods (Sequoia sempervirens) and 
+            their inland cousins, the Giant Sequoias (Sequoiadendron giganteum), have thrived on the Pacific 
+            Coast for over 20 million years. These forests create an ecosystem that is both complex and 
+            interdependent, providing a habitat for a diverse array of wildlife, including the northern spotted 
+            owl, black-tailed deer, and the elusive Pacific fisher.</p>
+        </article>
+
+    </div>
+    <section>
+        <form id="blog-form">
+            <h2>CREATE YOUR OWN POST HERE:</h2>
+        
+                <label class="form-item">Type your title here:</label>
+                <input class="form-item" type="text" name="title" id="title" required>
+            
+                <label class="form-item">Type your blog info here:</label>
+                <input  class="form-item" type="text-area" name="blogInfo" class="blogInfo" id="blogInfo" required>
+        
+                <input type="submit" value="Submit Article">
+
+        </form>
+    </section>
+    
+    <script type="module">
+        import { Articles, initialArticles } from './Articles.js';
+
+        // Use ReactDOM to render your Articles component
+        ReactDOM.render(React.createElement(Articles, { articles: initialArticles }), document.getElementById('articles-container'));
+    </script>
+
+
+    <script>
+        
+        document.getElementById('blog-form').addEventListener('submit', function(event) {
+        alert('hello world')
+        event.preventDefault(); // Prevent the default form submission, ensures server isn't called
+
+        // Calculate the current count of articles to determine the next article ID
+        var articlesContainer = document.getElementById('articles-container');
+        var currentArticleCount = articlesContainer.getElementsByTagName('article').length;
+        var articleIdCounter = currentArticleCount + 1; // Increment the counter based on the current count
+
+        // Get the values from the form inputs
+        var title = document.getElementById('title').value;
+        var blogInfo = document.getElementById('blogInfo').value;
+
+        // Create the new article elements
+        var article = document.createElement('article');
+        var h2 = document.createElement('h2');
+        var p = document.createElement('p');
+        var deleteButton = document.createElement('button');
+
+        // Generate a unique ID for the article
+        // Assuming there might be other articles, so we base the ID on the current timestamp
+        var uniqueId = 'article-' + articleIdCounter;
+        article.setAttribute('id', uniqueId);
+
+
+        // Set the content of the new elements
+        h2.textContent = title;
+        p.textContent = blogInfo;
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', function() {
+            document.getElementById(uniqueId).remove(); // This will remove the article when the delete button is clicked
+        });
+
+        // Append the new elements to the article
+        article.appendChild(h2);
+        article.appendChild(p);
+        article.appendChild(deleteButton);
+
+        // Append the new article to the body or another element of your choice
+        document.getElementById('articles-container').appendChild(article);
+
+        // Clear the form fields
+        document.getElementById('title').value = '';
+        document.getElementById('blog-info').value = '';
+    });
+    </script> -->
