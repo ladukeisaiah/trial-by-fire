@@ -1,0 +1,1 @@
+const colorThemse = document.querySelector
