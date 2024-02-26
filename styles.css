@@ -1,16 +1,29 @@
 /* <!-- my color pallete: #596a48, #212528, #999788, #c9c1b6, #403b35 --> */
+    :root {
+        --clr-body-bg: #c9c1b6;
+        --clr-article-bg: #212528;
+        --clr-text: #fff;
+        --clr-heading: #000;
+        --clr-heading-text: #596a48;
+        --clr-article-brdr: #fff;
+        --clr-header-bg: #000;
+    }
+
     header {
         position: fixed;
         top: 0;
+        left: 0;
         width: 100%;
-        background-color: #000;
+        background-color: var(--clr-header-bg);
         z-index: 1000;
-        padding: 10px 0;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
         align-items: center;
     }
     body {
-        padding-top: 135px;
-        background-color: #c9c1b6;
+        padding-top: 165px;
+        background-color: var(--clr-body-bg);
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -20,20 +33,40 @@
         font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
     h1 {
-        color: #596a48;
+        color: var(--clr-heading-text);
+        text-align: center;
+    }
+
+    h4, h5 {
+        color: var(--clr-heading-text);
+    }
+
+    .title-and-picker {
+        width: 100%;
+        padding-left: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         justify-content: center;
+        flex-grow: 1;
+    }
+
+    .word-counter {
+        margin-left: auto;
+        text-align: right;
+        padding-right: 30px;
     }
     
     p {
-        color: #fff;
+        color: var(--clr-text);
     }
 
-    article, form {
+    article, #article-form {
         
-        background-color:#212528;
-        border: 1px solid #999788;
+        background-color: var(--clr-article-bg);
+        border: 1px solid var(--clr-article-brdr);
         border-radius: 10px;
-        color: #fff;
+        color: var(--clr-text);
         box-shadow: 0px 0px 10px rgba(89, 106, 72, 0.5);
         padding: 20px; /* Adds space inside the card */
         margin: 20px auto; /* Adds space outside the card */
@@ -44,25 +77,25 @@
         text-wrap: wrap;
     }
 
-    form {
+    #article-form {
         display: flex;
         flex-direction: column;
     }
 
-    form > label {
+    #article-form > label {
         display: block;
         padding-top: 1rem;
         margin: 5px;
     }
 
-    form > input {
+    #article-form > input {
         display: block;
         margin: 3px;
-        background-color:#999788;
+        background-color: var(--clr-heading-text);
     }
 
     article > p {
-        color: #fff;
+        color: var(--clr-text);
     }
 
     #blogInfo {
@@ -74,5 +107,81 @@
         text-align: left;
     }
 
+    .color-picker > fieldset {
+        border: 0;
+        display: flex;
+        gap: 2rem;
+        width: fit-content;
+        height: 30px;
+        background: #fff;
+        padding: 1rem 3rem;
+        margin-inline: auto;
+        border-radius: 0 0 1rem 1rem;
+        right: 0;
+    }
 
+    .color-picker input[type="radio"] {
+        appearance: none;
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 3px solid var(--radio-color, currentColor);
+        border-radius: 50%;
+    }
 
+    .color-picker input[type="radio"]:checked {
+        background-color: var(--radio-color);
+    }
+
+    .color-picker input[type="radio"]#forest {
+        --radio-color: #c9c1b6;
+    }
+
+    .color-picker input[type="radio"]#light {
+        --radio-color: #d7d5d5;
+    }
+
+    .color-picker input[type="radio"]#dark {
+        --radio-color: #000;
+    }
+
+    /* the three beneath provide the colors for the theme picker form */
+
+    :root:has(#forest:checked) {
+        --clr-body-bg: #c9c1b6;
+        --clr-article-bg: #212528;
+        --clr-text: #fff;
+        --clr-heading: #000;
+        --clr-heading-text: #596a48;
+        --clr-article-brdr: #fff;
+        --clr-header-bg: #212528;
+    }
+
+    :root:has(#dark:checked) {
+        --clr-body-bg: hsl(209 50% 10%);
+        --clr-article-bg: hsl(209 50% 5%);
+        --clr-text: hsl(209 50% 90%);
+        --clr-heading: hsl(209 50% 80%);
+        --clr-heading-text: hsl(209 50% 80%);
+        --clr-article-brdr: hsl(209 50% 80%);
+        --clr-header-bg: #000;
+    }
+
+    :root:has(#light:checked) {
+        --clr-body-bg: hsl(0, 0%, 98%);
+        --clr-article-bg: hsl(0, 0%, 100%);
+        --clr-text: hsl(210, 10%, 20%);
+        --clr-heading: hsl(210, 15%, 25%);
+        --clr-heading-text: hsl(120, 34%, 40%);
+        --clr-article-brdr: hsl(210, 10%, 80%);
+        --clr-header-bg: hsl(210, 20%, 95%);
+    }
+
+    .visually-hidden {
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+      }

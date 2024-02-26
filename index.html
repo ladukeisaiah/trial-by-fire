@@ -23,14 +23,38 @@
 </head>
 
 <header>
-    <h1>WE LOVE TREES</h1>
+    <div class="title-and-picker">
+        <h1>WE LOVE TREES</h1>
+        <div  class="color-picker">
+            <form class="color-picker">
+                <fieldset>
+                    <legend class="visually-hidden">Pick a color scheme</legend>
+                    <label for="theme" class="visually-hidden"
+                    >Forest theme</label>
+                    <input type="radio" 
+                    name="theme" id="forest" checked>
+
+                    <label for="theme" class="visually-hidden"
+                    >Light theme</label>
+                    <input type="radio" 
+                    name="theme" id="light">
+
+                    <label for="theme" class="visually-hidden"
+                    >Dark theme</label>
+                    <input type="radio" 
+                    name="theme" id="dark">
+                    
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="word-counter">
+        <h4>Blog read time:</h4>
+        <h5 id="blog-read-time"></h5>
+    </div>
 </header>
 
 <body>
-    <div>
-        <h3>Blog read time:</h3>
-        <h5 id="blog-read-time"></h5>
-    </div>
     <div id="articles-container"></div>
     <form id="article-form">
         <h2>CREATE YOUR OWN POST HERE:</h2>
@@ -58,12 +82,14 @@
             const container = document.getElementById('articles-container');
             container.innerHTML = ''; // This will clear existing articles as if to reset the state but its not necessary
             articles.forEach(article => {
+                article.id = article.index + 1;
                 const articleEl = document.createElement('div');
                 articleEl.innerHTML = `
                 <article id=${article.id}>
-                    <h2>${article.title}</h2>
-                    <p>${article.blogInfo}</p>
+                    <h2 contenteditable="true">${article.title}</h2>
+                    <p contenteditable="true">${article.blogInfo}</p>
                     <button onclick="deleteArticle(${article.id})">Delete</button>
+                    <button onclick="updateArticle(${article.id})">Update</button>
                 </article>
                 `;
                 container.appendChild(articleEl);
@@ -86,6 +112,16 @@
         function deleteArticle(id) {
             articles = articles.filter(article => article.id !== id);
             renderArticles();
+        }
+
+        function updateArticle(id) {
+            const articleToUpdate = articles.find(article => article.id === id);
+            const articleEl = getElementById(id);
+            const newTitle = articleEl.querySelector('h2');
+            const newBlogInfo = articleEl.querySelector('p');
+
+            articleToUpdate.title = newTitle;
+            articleToUpdate.blogInfo = newBlogInfo;
         }
 
         // This is for the initial render
