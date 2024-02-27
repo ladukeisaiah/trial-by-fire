@@ -70,30 +70,44 @@
     </form>
 
     <script>
-        let articles = [
-            { id: 1, title: 'The Guardians of the Waterways: Mangrove Forests', blogInfo: 'Mangrove forests, often found at the edge of land and sea in tropical and subtropical regions, serve as critical buffers against coastal erosion and storms. These unique ecosystems, characterized by salt-tolerant trees and dense root systems, not only protect shorelines but also host a diverse array of life. They act as nurseries for many marine species, including fish and crustaceans, which find shelter among the tangled roots. Mangroves are not just ecological powerhouses; they are also among the most carbon-rich forests in the tropics, playing a vital role in mitigating climate change. Despite their importance, mangrove forests face threats from deforestation, pollution, and climate change, highlighting the need for conservation efforts to preserve these vital guardians of the coast.' },
-            { id: 2, title: 'The Enchanted World of Cloud Forests', blogInfo: 'Perched high in the mountains, cloud forests capture the imagination with their mist-wrapped trees and lush, verdant landscapes. These forests, often cloaked in fog, receive moisture directly from the clouds, enabling them to thrive in regions where rainfall is scarce. This unique hydration method supports an incredible diversity of plant and animal life, with many species found nowhere else on Earth. Epiphytes, plants that grow on other plants without harming them, are particularly abundant, creating a layered tapestry of life that clings to every tree branch. Cloud forests, however, are as fragile as they are beautiful. With their existence tied closely to specific climatic conditions, they are among the ecosystems most vulnerable to climate change. Preserving these mystical forests is crucial for biodiversity, water regulation, and the well-being of indigenous communities who rely on them.' },
-            { id: 3, title: 'The Resilient Pioneers: Boreal Forests of the North', blogInfo: 'Spanning vast expanses across the northern hemisphere, boreal forests, or taigas, represent one of the worlds largest terrestrial biomes. Dominated by coniferous trees such as pines, spruces, and larches, these forests endure the harsh climates of the subarctic and cold continental regions. Boreal forests are a sanctuary for wildlife, providing habitat for species like the moose, gray wolf, and myriad bird populations that migrate seasonally. These forests are not just crucial for biodiversity; they are significant carbon sinks, storing vast amounts of the planets carbon in their dense biomass and peatlands. However, boreal forests are increasingly under threat from logging, mining, and the effects of climate change, such as increased wildfires and insect outbreaks. Protecting these resilient ecosystems is vital for maintaining global biodiversity and climate regulation.' },
-            { id: 4, title: 'The Forgotten Wealth: Dry Tropical Forests', blogInfo: 'Dry tropical forests, often overshadowed by their more famous rainforest counterparts, are ecosystems teeming with life adapted to arid conditions. Found in regions where seasonal rains are followed by a lengthy dry period, these forests are characterized by a mix of deciduous trees that shed their leaves to conserve water. Despite facing extreme temperature variations and low rainfall, dry tropical forests boast high levels of biodiversity, including a plethora of plant species that burst into leafy green and vibrant blooms with the arrival of rain. These ecosystems are crucial for the livelihoods of local communities, providing food, medicine, and timber. Yet, they are among the most endangered forest types globally, suffering from overexploitation, agricultural expansion, and climate change. Conservation efforts in these areas are critical to preserving their unique biodiversity and the services they provide to humanity.' },
-        ];
+
+        let articles;
+
+        function generateUniqueId() {
+            return `${Date.now()}${Math.random().toString(36).substr(2, 9)}`;
+        }
+
+        if (localStorage.getItem("articles") !== null) {
+            articles = JSON.parse(localStorage.getItem("articles")) || [];
+        } else { 
+            articles = [
+            { id: generateUniqueId(), title: 'The Guardians of the Waterways: Mangrove Forests', blogInfo: 'Mangrove forests, often found at the edge of land and sea in tropical and subtropical regions, serve as critical buffers against coastal erosion and storms. These unique ecosystems, characterized by salt-tolerant trees and dense root systems, not only protect shorelines but also host a diverse array of life. They act as nurseries for many marine species, including fish and crustaceans, which find shelter among the tangled roots. Mangroves are not just ecological powerhouses; they are also among the most carbon-rich forests in the tropics, playing a vital role in mitigating climate change. Despite their importance, mangrove forests face threats from deforestation, pollution, and climate change, highlighting the need for conservation efforts to preserve these vital guardians of the coast.' },
+            { id: generateUniqueId(), title: 'The Enchanted World of Cloud Forests', blogInfo: 'Perched high in the mountains, cloud forests capture the imagination with their mist-wrapped trees and lush, verdant landscapes. These forests, often cloaked in fog, receive moisture directly from the clouds, enabling them to thrive in regions where rainfall is scarce. This unique hydration method supports an incredible diversity of plant and animal life, with many species found nowhere else on Earth. Epiphytes, plants that grow on other plants without harming them, are particularly abundant, creating a layered tapestry of life that clings to every tree branch. Cloud forests, however, are as fragile as they are beautiful. With their existence tied closely to specific climatic conditions, they are among the ecosystems most vulnerable to climate change. Preserving these mystical forests is crucial for biodiversity, water regulation, and the well-being of indigenous communities who rely on them.' },
+            { id: generateUniqueId(), title: 'The Resilient Pioneers: Boreal Forests of the North', blogInfo: 'Spanning vast expanses across the northern hemisphere, boreal forests, or taigas, represent one of the worlds largest terrestrial biomes. Dominated by coniferous trees such as pines, spruces, and larches, these forests endure the harsh climates of the subarctic and cold continental regions. Boreal forests are a sanctuary for wildlife, providing habitat for species like the moose, gray wolf, and myriad bird populations that migrate seasonally. These forests are not just crucial for biodiversity; they are significant carbon sinks, storing vast amounts of the planets carbon in their dense biomass and peatlands. However, boreal forests are increasingly under threat from logging, mining, and the effects of climate change, such as increased wildfires and insect outbreaks. Protecting these resilient ecosystems is vital for maintaining global biodiversity and climate regulation.' },
+            { id: generateUniqueId(), title: 'The Forgotten Wealth: Dry Tropical Forests', blogInfo: 'Dry tropical forests, often overshadowed by their more famous rainforest counterparts, are ecosystems teeming with life adapted to arid conditions. Found in regions where seasonal rains are followed by a lengthy dry period, these forests are characterized by a mix of deciduous trees that shed their leaves to conserve water. Despite facing extreme temperature variations and low rainfall, dry tropical forests boast high levels of biodiversity, including a plethora of plant species that burst into leafy green and vibrant blooms with the arrival of rain. These ecosystems are crucial for the livelihoods of local communities, providing food, medicine, and timber. Yet, they are among the most endangered forest types globally, suffering from overexploitation, agricultural expansion, and climate change. Conservation efforts in these areas are critical to preserving their unique biodiversity and the services they provide to humanity.' },
+        ]};
+
+        const storeArticles = function () {
+            localStorage.setItem("articles", JSON.stringify(articles));
+        }
 
         // This function to render articles
         function renderArticles() {
             const container = document.getElementById('articles-container');
             container.innerHTML = ''; // This will clear existing articles as if to reset the state but its not necessary
             articles.forEach(article => {
-                article.id = article.index + 1;
                 const articleEl = document.createElement('div');
                 articleEl.innerHTML = `
-                <article id=${article.id}>
+                <article>
                     <h2 contenteditable="true">${article.title}</h2>
                     <p contenteditable="true">${article.blogInfo}</p>
-                    <button onclick="deleteArticle(${article.id})">Delete</button>
-                    <button onclick="updateArticle(${article.id})">Update</button>
+                    <button onclick="deleteArticle('${article.id}')">Delete</button>
+                    <button onclick="updateArticle('${article.id}')">Update</button>
                 </article>
                 `;
                 container.appendChild(articleEl);
             });
+            storeArticles();
         }
 
         // Function to add a new article
@@ -101,7 +115,7 @@
             event.preventDefault();
             const title = document.getElementById('title').value;
             const blogInfo = document.getElementById('blogInfo').value;
-            const newId = articles.length ? articles[articles.length - 1].id + 1 : 1;
+            const newId = generateUniqueId();
             articles.push({ id: newId, title, blogInfo });
             renderArticles();
             document.getElementById('title').value = '';
@@ -167,6 +181,30 @@
             // return totalWordCount;
         }
         getReadTime();
+
+        const colorThemes = document.querySelectorAll('[name="theme"]');
+
+        const storeTheme = function(theme) {
+            localStorage.setItem("theme", theme)
+        }
+
+        const retrieveTheme = function() {
+            const activeTheme = localStorage.getItem("theme");
+            colorThemes.forEach((themeOption) => {
+                if (themeOption.id === activeTheme) {
+                    themeOption.checked = true;
+                }
+            })
+        }
+
+        colorThemes.forEach(themeOption => {
+            themeOption.addEventListener('click', () => {
+                storeTheme(themeOption.id);
+            })
+        })
+        
+        document.onload = retrieveTheme();
+
     </script>
 
 
