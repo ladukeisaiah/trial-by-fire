@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <!-- my color pallete: #596a48, #212528, #999788, #c9c1b6, #403b35 -->
     <link rel="stylesheet" type="text/css" href="styles.css" />
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
-    <title>Document</title>
+    <title>WE LOVE TREES</title>
     <!-- We are looking for the blog read time -->
     <!-- we would like it to be located under the heading  it will be shown in minutes-->
     <!-- and we will calculate it using the following formula. we will estimate that a user can read 4 words a second-->
@@ -19,85 +18,103 @@
     <!-- We will create a new section at the top of the body to then display our blog's read time-->
     <!-- Populate new section with calculation -->
     <!---->
+  </head>
 
-</head>
-
-<header>
+  <header>
     <div class="title-and-picker">
-        <h1>WE LOVE TREES</h1>
-        <div  class="color-picker">
-            <form class="color-picker">
-                <fieldset>
-                    <legend class="visually-hidden">Pick a color scheme</legend>
-                    <label for="forest" class="visually-hidden"
-                    >Forest theme</label>
-                    <input type="radio" 
-                    name="theme" id="forest" checked>
+      <h1>WE LOVE TREES</h1>
+      <div class="color-picker">
+        <form class="color-picker">
+          <fieldset>
+            <legend class="visually-hidden">Pick a color scheme</legend>
+            <label for="forest" class="visually-hidden">Forest theme</label>
+            <input type="radio" name="theme" id="forest" checked />
 
-                    <label for="light" class="visually-hidden"
-                    >Light theme</label>
-                    <input type="radio" 
-                    name="theme" id="light">
+            <label for="light" class="visually-hidden">Light theme</label>
+            <input type="radio" name="theme" id="light" />
 
-                    <label for="dark" class="visually-hidden"
-                    >Dark theme</label>
-                    <input type="radio" 
-                    name="theme" id="dark">
-                    
-                </fieldset>
-            </form>
-        </div>
+            <label for="dark" class="visually-hidden">Dark theme</label>
+            <input type="radio" name="theme" id="dark" />
+          </fieldset>
+        </form>
+      </div>
     </div>
     <div class="word-counter">
-        <h4>Blog read time:</h4>
-        <h5 id="blog-read-time"></h5>
+      <h4>Blog read time:</h4>
+      <h5 id="blog-read-time"></h5>
     </div>
-</header>
+  </header>
 
-<body>
+  <body>
     <div id="articles-container"></div>
     <form id="article-form">
-        <h2>CREATE YOUR OWN POST HERE:</h2>
-    
-            <label class="form-item">Type your title here:</label>
-            <input class="form-item" type="text" name="title" id="title" required>
-        
-            <label class="form-item">Type your blog info here:</label>
-            <input  class="form-item" type="text-area" name="blogInfo" class="blogInfo" id="blogInfo" required>
-    
-            <input type="submit" value="Submit Article">
+      <h2>CREATE YOUR OWN POST HERE:</h2>
 
+      <label class="form-item">Type your title here:</label>
+      <input class="form-item" type="text" name="title" id="title" required />
+
+      <label class="form-item">Type your blog info here:</label>
+      <input
+        class="form-item"
+        type="text-area"
+        name="blogInfo"
+        class="blogInfo"
+        id="blogInfo"
+        required
+      />
+
+      <input type="submit" value="Submit Article" />
     </form>
 
     <script>
+      let articles;
 
-        let articles;
+      function generateUniqueId() {
+        return `${Date.now()}${Math.random().toString(36).substr(2, 9)}`;
+      }
 
-        function generateUniqueId() {
-            return `${Date.now()}${Math.random().toString(36).substr(2, 9)}`;
-        }
+      if (localStorage.getItem("articles") !== null) {
+        articles = JSON.parse(localStorage.getItem("articles")) || [];
+      } else {
+        articles = [
+          {
+            id: generateUniqueId(),
+            title: "The Guardians of the Waterways: Mangrove Forests",
+            blogInfo:
+              "Mangrove forests, often found at the edge of land and sea in tropical and subtropical regions, serve as critical buffers against coastal erosion and storms. These unique ecosystems, characterized by salt-tolerant trees and dense root systems, not only protect shorelines but also host a diverse array of life. They act as nurseries for many marine species, including fish and crustaceans, which find shelter among the tangled roots. Mangroves are not just ecological powerhouses; they are also among the most carbon-rich forests in the tropics, playing a vital role in mitigating climate change. Despite their importance, mangrove forests face threats from deforestation, pollution, and climate change, highlighting the need for conservation efforts to preserve these vital guardians of the coast.",
+          },
+          {
+            id: generateUniqueId(),
+            title: "The Enchanted World of Cloud Forests",
+            blogInfo:
+              "Perched high in the mountains, cloud forests capture the imagination with their mist-wrapped trees and lush, verdant landscapes. These forests, often cloaked in fog, receive moisture directly from the clouds, enabling them to thrive in regions where rainfall is scarce. This unique hydration method supports an incredible diversity of plant and animal life, with many species found nowhere else on Earth. Epiphytes, plants that grow on other plants without harming them, are particularly abundant, creating a layered tapestry of life that clings to every tree branch. Cloud forests, however, are as fragile as they are beautiful. With their existence tied closely to specific climatic conditions, they are among the ecosystems most vulnerable to climate change. Preserving these mystical forests is crucial for biodiversity, water regulation, and the well-being of indigenous communities who rely on them.",
+          },
+          {
+            id: generateUniqueId(),
+            title: "The Resilient Pioneers: Boreal Forests of the North",
+            blogInfo:
+              "Spanning vast expanses across the northern hemisphere, boreal forests, or taigas, represent one of the worlds largest terrestrial biomes. Dominated by coniferous trees such as pines, spruces, and larches, these forests endure the harsh climates of the subarctic and cold continental regions. Boreal forests are a sanctuary for wildlife, providing habitat for species like the moose, gray wolf, and myriad bird populations that migrate seasonally. These forests are not just crucial for biodiversity; they are significant carbon sinks, storing vast amounts of the planets carbon in their dense biomass and peatlands. However, boreal forests are increasingly under threat from logging, mining, and the effects of climate change, such as increased wildfires and insect outbreaks. Protecting these resilient ecosystems is vital for maintaining global biodiversity and climate regulation.",
+          },
+          {
+            id: generateUniqueId(),
+            title: "The Forgotten Wealth: Dry Tropical Forests",
+            blogInfo:
+              "Dry tropical forests, often overshadowed by their more famous rainforest counterparts, are ecosystems teeming with life adapted to arid conditions. Found in regions where seasonal rains are followed by a lengthy dry period, these forests are characterized by a mix of deciduous trees that shed their leaves to conserve water. Despite facing extreme temperature variations and low rainfall, dry tropical forests boast high levels of biodiversity, including a plethora of plant species that burst into leafy green and vibrant blooms with the arrival of rain. These ecosystems are crucial for the livelihoods of local communities, providing food, medicine, and timber. Yet, they are among the most endangered forest types globally, suffering from overexploitation, agricultural expansion, and climate change. Conservation efforts in these areas are critical to preserving their unique biodiversity and the services they provide to humanity.",
+          },
+        ];
+      }
 
-        if (localStorage.getItem("articles") !== null) {
-            articles = JSON.parse(localStorage.getItem("articles")) || [];
-        } else { 
-            articles = [
-            { id: generateUniqueId(), title: 'The Guardians of the Waterways: Mangrove Forests', blogInfo: 'Mangrove forests, often found at the edge of land and sea in tropical and subtropical regions, serve as critical buffers against coastal erosion and storms. These unique ecosystems, characterized by salt-tolerant trees and dense root systems, not only protect shorelines but also host a diverse array of life. They act as nurseries for many marine species, including fish and crustaceans, which find shelter among the tangled roots. Mangroves are not just ecological powerhouses; they are also among the most carbon-rich forests in the tropics, playing a vital role in mitigating climate change. Despite their importance, mangrove forests face threats from deforestation, pollution, and climate change, highlighting the need for conservation efforts to preserve these vital guardians of the coast.' },
-            { id: generateUniqueId(), title: 'The Enchanted World of Cloud Forests', blogInfo: 'Perched high in the mountains, cloud forests capture the imagination with their mist-wrapped trees and lush, verdant landscapes. These forests, often cloaked in fog, receive moisture directly from the clouds, enabling them to thrive in regions where rainfall is scarce. This unique hydration method supports an incredible diversity of plant and animal life, with many species found nowhere else on Earth. Epiphytes, plants that grow on other plants without harming them, are particularly abundant, creating a layered tapestry of life that clings to every tree branch. Cloud forests, however, are as fragile as they are beautiful. With their existence tied closely to specific climatic conditions, they are among the ecosystems most vulnerable to climate change. Preserving these mystical forests is crucial for biodiversity, water regulation, and the well-being of indigenous communities who rely on them.' },
-            { id: generateUniqueId(), title: 'The Resilient Pioneers: Boreal Forests of the North', blogInfo: 'Spanning vast expanses across the northern hemisphere, boreal forests, or taigas, represent one of the worlds largest terrestrial biomes. Dominated by coniferous trees such as pines, spruces, and larches, these forests endure the harsh climates of the subarctic and cold continental regions. Boreal forests are a sanctuary for wildlife, providing habitat for species like the moose, gray wolf, and myriad bird populations that migrate seasonally. These forests are not just crucial for biodiversity; they are significant carbon sinks, storing vast amounts of the planets carbon in their dense biomass and peatlands. However, boreal forests are increasingly under threat from logging, mining, and the effects of climate change, such as increased wildfires and insect outbreaks. Protecting these resilient ecosystems is vital for maintaining global biodiversity and climate regulation.' },
-            { id: generateUniqueId(), title: 'The Forgotten Wealth: Dry Tropical Forests', blogInfo: 'Dry tropical forests, often overshadowed by their more famous rainforest counterparts, are ecosystems teeming with life adapted to arid conditions. Found in regions where seasonal rains are followed by a lengthy dry period, these forests are characterized by a mix of deciduous trees that shed their leaves to conserve water. Despite facing extreme temperature variations and low rainfall, dry tropical forests boast high levels of biodiversity, including a plethora of plant species that burst into leafy green and vibrant blooms with the arrival of rain. These ecosystems are crucial for the livelihoods of local communities, providing food, medicine, and timber. Yet, they are among the most endangered forest types globally, suffering from overexploitation, agricultural expansion, and climate change. Conservation efforts in these areas are critical to preserving their unique biodiversity and the services they provide to humanity.' },
-        ]};
+      const storeArticles = function () {
+        localStorage.setItem("articles", JSON.stringify(articles));
+      };
 
-        const storeArticles = function () {
-            localStorage.setItem("articles", JSON.stringify(articles));
-        }
-
-        // This function to render articles
-        function renderArticles() {
-            const container = document.getElementById('articles-container');
-            container.innerHTML = ''; // This will clear existing articles as if to reset the state but its not necessary
-            articles.forEach(article => {
-                const articleEl = document.createElement('div');
-                articleEl.innerHTML = `
+      // This function to render articles
+      function renderArticles() {
+        const container = document.getElementById("articles-container");
+        container.innerHTML = ""; // This will clear existing articles as if to reset the state but its not necessary
+        articles.forEach((article) => {
+          const articleEl = document.createElement("div");
+          articleEl.innerHTML = `
                 <article>
                     <h2 contenteditable="true">${article.title}</h2>
                     <p contenteditable="true">${article.blogInfo}</p>
@@ -105,108 +122,105 @@
                     <button onclick="updateArticle('${article.id}')">Update</button>
                 </article>
                 `;
-                container.appendChild(articleEl);
-            });
-            storeArticles();
-        }
+          container.appendChild(articleEl);
+        });
+        storeArticles();
+      }
 
-        // Function to add a new article
-        document.getElementById('article-form').addEventListener('submit', event => {
-            event.preventDefault();
-            const title = document.getElementById('title').value;
-            const blogInfo = document.getElementById('blogInfo').value;
-            const newId = generateUniqueId();
-            articles.push({ id: newId, title, blogInfo });
-            renderArticles();
-            document.getElementById('title').value = '';
-            document.getElementById('blogInfo').value = '';
+      // Function to add a new article
+      document
+        .getElementById("article-form")
+        .addEventListener("submit", (event) => {
+          event.preventDefault();
+          const title = document.getElementById("title").value;
+          const blogInfo = document.getElementById("blogInfo").value;
+          const newId = generateUniqueId();
+          articles.push({ id: newId, title, blogInfo });
+          renderArticles();
+          document.getElementById("title").value = "";
+          document.getElementById("blogInfo").value = "";
         });
 
-        // Function to delete an article
-        function deleteArticle(id) {
-            articles = articles.filter(article => article.id !== id);
-            renderArticles();
-        }
-
-        function updateArticle(id) {
-            const articleToUpdate = articles.find(article => article.id === id);
-            const articleEl = getElementById(id);
-            const newTitle = articleEl.querySelector('h2');
-            const newBlogInfo = articleEl.querySelector('p');
-
-            articleToUpdate.title = newTitle;
-            articleToUpdate.blogInfo = newBlogInfo;
-        }
-
-        // This is for the initial render
+      // Function to delete an article
+      function deleteArticle(id) {
+        articles = articles.filter((article) => article.id !== id);
         renderArticles();
+      }
 
-        function getReadTime() {
-            // .innerText.match(/\S+/g).length
-            let paragraphs = document.getElementsByTagName('p');
-            let headers = document.getElementsByTagName('h2');
-            
-            let pWordCount = 0;
-            let h2WordCount = 0;
-            console.log(paragraphs)
+      function updateArticle(id) {
+        const articleToUpdate = articles.find((article) => article.id === id);
+        const articleEl = getElementById(id);
+        const newTitle = articleEl.querySelector("h2");
+        const newBlogInfo = articleEl.querySelector("p");
 
-            // below: this should cycle through the array of ps and count their length and add it to the pWordCount
-            for (let i = 0; i < paragraphs.length; i++) {
-                const paragraph = paragraphs[i].innerText.match(/\S+/g).length;
-                pWordCount += paragraph;
-            }
+        articleToUpdate.title = newTitle;
+        articleToUpdate.blogInfo = newBlogInfo;
+      }
 
-            // below: this should cycle through the array of h2s and count their length and add it to the h2WordCount
-            for (let i = 0; i < headers.length; i++) {
-                const header = headers[i].innerText.match(/\S+/g).length;
-                h2WordCount += header;
-            }
+      // This is for the initial render
+      renderArticles();
 
-            const totalWordCount = pWordCount + h2WordCount;
+      function getReadTime() {
+        // .innerText.match(/\S+/g).length
+        let paragraphs = document.getElementsByTagName("p");
+        let headers = document.getElementsByTagName("h2");
 
-            const readTime = document.getElementById("blog-read-time");
-            readTime.innerText = totalWordCount;
+        let pWordCount = 0;
+        let h2WordCount = 0;
+        console.log(paragraphs);
 
-            // for (paragraph of paragraphs) {
-            //     pWordCount += paragraph.innerText.match(/\S+/g).length;
-            // }
-
-            console.log(h2WordCount)
-            // const h2WordCount = document.getElementsByTagName('h2').innerText.match(/\S+/g).length;
-
-            // const totalWordCount = pWordCount + h2WordCount;
-
-            
-
-            // return totalWordCount;
-        }
-        getReadTime();
-
-        const colorThemes = document.querySelectorAll('[name="theme"]');
-
-        const storeTheme = function(theme) {
-            localStorage.setItem("theme", theme)
+        // below: this should cycle through the array of ps and count their length and add it to the pWordCount
+        for (let i = 0; i < paragraphs.length; i++) {
+          const paragraph = paragraphs[i].innerText.match(/\S+/g).length;
+          pWordCount += paragraph;
         }
 
-        const retrieveTheme = function() {
-            const activeTheme = localStorage.getItem("theme");
-            colorThemes.forEach((themeOption) => {
-                if (themeOption.id === activeTheme) {
-                    themeOption.checked = true;
-                }
-            })
+        // below: this should cycle through the array of h2s and count their length and add it to the h2WordCount
+        for (let i = 0; i < headers.length; i++) {
+          const header = headers[i].innerText.match(/\S+/g).length;
+          h2WordCount += header;
         }
 
-        colorThemes.forEach(themeOption => {
-            themeOption.addEventListener('click', () => {
-                storeTheme(themeOption.id);
-            })
-        })
-        
-        document.onload = retrieveTheme();
+        const totalWordCount = pWordCount + h2WordCount;
 
+        const readTime = document.getElementById("blog-read-time");
+        readTime.innerText = totalWordCount;
+
+        // for (paragraph of paragraphs) {
+        //     pWordCount += paragraph.innerText.match(/\S+/g).length;
+        // }
+
+        console.log(h2WordCount);
+        // const h2WordCount = document.getElementsByTagName('h2').innerText.match(/\S+/g).length;
+
+        // const totalWordCount = pWordCount + h2WordCount;
+
+        // return totalWordCount;
+      }
+      getReadTime();
+
+      const colorThemes = document.querySelectorAll('[name="theme"]');
+
+      const storeTheme = function (theme) {
+        localStorage.setItem("theme", theme);
+      };
+
+      const retrieveTheme = function () {
+        const activeTheme = localStorage.getItem("theme");
+        colorThemes.forEach((themeOption) => {
+          if (themeOption.id === activeTheme) {
+            themeOption.checked = true;
+          }
+        });
+      };
+
+      colorThemes.forEach((themeOption) => {
+        themeOption.addEventListener("click", () => {
+          storeTheme(themeOption.id);
+        });
+      });
+
+      document.onload = retrieveTheme();
     </script>
-
-
-</body>
+  </body>
 </html>
